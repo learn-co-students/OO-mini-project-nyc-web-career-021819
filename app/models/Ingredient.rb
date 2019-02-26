@@ -13,20 +13,16 @@ class Ingredient
   end
 
   # #HELPER
-  # def allergen_helper
-  #   Allergen.all.select do |allergen|
-  #     allergen.ingredient == self
-  #   end
-  # end
-  #
-  #
-  # Ingredient.all.each do |ingredient|
-  #   #[egg, nut, chocolate, walnuts]
-  #   ingredient.allergen.count
+  def allergen_counter_helper
+    Allergen.all.select do |allergen|
+      allergen.ingredient == self
+    end.length
+  end
 
-  # def self.most_common_allergen
-  #   # variable = Allergen.all.map do |allergen|
-  #   #   allergen.ingredient.name
-  # end
+  def self.most_common_allergen
+    Ingredient.all.sort_by do |ingredient|
+      ingredient.allergen_counter_helper
+    end.last
+  end
 
 end
