@@ -41,6 +41,16 @@ class User
     end
   end
 
+  def safe_recipes
+    Recipe.all.select do |recipe|
+      User.allergens.each do |allergen|
+        unless recipe.include?(allergen)
+        end
+      end
+    end
+
+  end
+
   def self.all
     @@all
   end
