@@ -42,14 +42,23 @@ class User
   end
 
   def safe_recipes
-    Recipe.all.select do |recipe|
-      User.allergens.each do |allergen|
-        unless recipe.include?(allergen)
+    safe_recipes = []
+    unsafe_recipes = []
+    Recipe.all.each do |recipe|
+        # binding.pry
+        # if recipe.ingredients.include?(self.allergens)
+        #   unsafe_recipes << recipe
+        # else
+        #   safe_recipes << recipe
+        # end
+        if (recipe.ingredients & self.allergens).empty?
+          safe_recipes << recipe
         end
       end
-    end
-
+    safe_recipes
   end
+
+
 
   def self.all
     @@all

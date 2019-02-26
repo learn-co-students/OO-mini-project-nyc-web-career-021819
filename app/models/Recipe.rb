@@ -69,7 +69,6 @@ class Recipe
 
   def allergens
     all_allergens = Allergen.all.select do |allergen|
-      # binding.pry
       self.ingredients.include?(allergen.ingredient)
     end
     all_allergens.map do |allergen|
